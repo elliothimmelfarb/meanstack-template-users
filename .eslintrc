@@ -1,0 +1,15 @@
+{
+	"extends": "airbnb",
+	"globals": {
+		"angular": true,
+    "before": true,
+    "describe": true,
+    "it": true,
+    "beforeEach": true,
+    "after": true
+  },
+	"rules": {
+		"no-use-before-define": ["error", { "functions": false, "classes": true }],
+		"no-underscore-dangle": ["error", { "allow": ["_id"] }]
+	}
+}
