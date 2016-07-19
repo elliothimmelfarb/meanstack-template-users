@@ -3,14 +3,14 @@
     .module('myApp')
     .controller('LoginController', LoginController);
 
-  function LoginController(SweetAlert, User) {
+  function LoginController(SweetAlert, User, $state) {
     const vm = this;
     vm.submit = login;
 
     function login(userObj) {
       User.login(userObj)
-        .then(res => {
-          console.log(res);
+        .then(() => {
+          $state.go('profile');
         })
         .catch(err => {
           vm.user.email = null;

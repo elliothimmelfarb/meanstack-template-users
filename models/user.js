@@ -1,5 +1,4 @@
 const JWT_SECRET = process.env.JWT_SECRET;
-console.log(JWT_SECRET);
 
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
@@ -52,11 +51,10 @@ userSchema.statics.authMiddleware = (req, res, next) => {
     if (err) return res.status(401).send(err);
 
     return User.findById(payload._id)
+      .select('-password')
       .exec((err, dbUser) => {
         if (err || !dbUser) return res.status(401).send(err || { error: 'User not found.' });
-        let user = req.user;
-        user = dbUser;
-        user.password = null;
+        req.user = dbUser; // eslint-disable-line no-param-reassign
         return next();
       });
   });

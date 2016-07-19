@@ -13,6 +13,7 @@ router.route('/')
 });
 
 router.get('/profile', User.authMiddleware, (req, res) => {
+  console.log(req.user);
   res.send(req.user);
 });
 

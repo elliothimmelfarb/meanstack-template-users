@@ -8,8 +8,6 @@
     .state('home', {
       url: '/',
       templateUrl: '/html/home.html',
-      controller: 'MainController',
-      controllerAs: 'main',
     })
     .state('register', {
       url: '/register',

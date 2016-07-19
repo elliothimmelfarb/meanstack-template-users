@@ -19,9 +19,13 @@ head
   
   script(src="/js/bundle.js")
   
-body(ng-app='myApp')
+body(ng-app='myApp' ng-controller='MainController as main')
   .container-fluid
     h1 #{title}
-    button.btn.btn-default(ui-sref='register') Register
-    button.btn.btn-default(ui-sref='login') Login
+    button.btn.btn-default(ui-sref='home') Home
+    button.btn.btn-default(ui-sref='profile' ng-if='main.isAuthenticated()') Profile
+    button.btn.btn-default(ng-click='main.logout()' ng-if='main.isAuthenticated()') Logout
+    button.btn.btn-default(ui-sref='register' ng-if='!main.isAuthenticated()') Register
+    button.btn.btn-default(ui-sref='login' ng-if='!main.isAuthenticated()') Login
+    span(ng-if='main.isAuthenticated()') Hello, {{main.username}}
     ui-view
