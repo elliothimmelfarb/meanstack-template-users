@@ -38,15 +38,17 @@ const paths = {
 
 
 // RUNNERS
-gulp.task('default', ['build', 'watch', 'nodemon']);
+gulp.task('default', ['build', 'watch:client', 'nodemon']);
 
-gulp.task('sync', ['build', 'watch', 'b-sync']);
+gulp.task('sync', ['build', 'watch:client', 'b-sync']);
 
-gulp.task('build', ['pug/html', 'css', 'js', 'favicon']);
+gulp.task('build', ['pug', 'css', 'js', 'favicon']);
+
+gulp.task('tests', ['test'], () => gulp.watch('./test/**/*.js', ['test']));
 
 // WATCHES
-gulp.task('watch', () => {
-  gulp.watch(['client/html/**/*.pug', 'client/html/**/*.html'], ['pug/html']);
+gulp.task('watch:client', () => {
+  gulp.watch(['client/html/**/*.pug', 'client/html/**/*.html'], ['pug']);
   gulp.watch('client/js/**/*.js', ['js']);
   gulp.watch('client/css/**/*.scss', ['css']);
   gulp.watch('client/*.ico', ['favicon']);
@@ -56,10 +58,6 @@ gulp.task('watch', () => {
 gulp.task('test', () =>
   gulp.src('./test/**/*.js', { read: false })
   .pipe(mocha())
-);
-
-gulp.task('testing', () =>
-  gulp.watch('./test/**/*.js', ['test'])
 );
 
 
@@ -118,13 +116,13 @@ gulp.task('clean:js', () =>
 
 
 // HTML
-gulp.task('html', () =>
+gulp.task('html', ['clean:html'], () =>
   gulp.src(paths.html.input)
   .pipe(gulp.dest(paths.html.output))
 );
-
+// TODO: FIX PUG/HTML CONCURRENCY BUG
 // PUG
-gulp.task('pug/html', ['clean:html', 'html'], () =>
+gulp.task('pug', ['clean:html'], () =>
   gulp.src(paths.pug.input)
     .pipe(plumber())
     .pipe(pug())

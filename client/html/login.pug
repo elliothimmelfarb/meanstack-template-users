@@ -1,0 +1,12 @@
+.main-center
+  h1 Login
+  form(ng-submit='login.submit(login.user)')
+    .form-group
+      input.form-control(type='email', ng-model='login.user.email', placeholder='Email', required)
+    .form-group
+      input.form-control(type='password', ng-model='login.user.password', placeholder='Password', required='')
+    button.form-control.btn.btn-success Login
+    hr
+    button.btn.btn-primary.form-control(ng-click="authenticate('facebook')") Sign in with Facebook
+
+          

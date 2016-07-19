@@ -9,6 +9,7 @@ head
   link(rel="stylesheet", href="/css/style.css")
   
   script(src="/bower_components/angular/angular.js", charset="utf-8")
+  script(src="/bower_components/satellizer/satellizer.js", charset="utf-8")
   script(src="/bower_components/angular-animate/angular-animate.js", charset="utf-8")
   script(src="/bower_components/angular-touch/angular-touch.js", charset="utf-8")
   script(src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js", charset="utf-8")
@@ -18,9 +19,9 @@ head
   
   script(src="/js/bundle.js")
   
-body(ng-app='myApp', ng-controller='mainController as main')
+body(ng-app='myApp')
   .container-fluid
     h1 #{title}
-    button.btn.btn-default Register
-    button.btn.btn-default Login
+    button.btn.btn-default(ui-sref='register') Register
+    button.btn.btn-default(ui-sref='login') Login
     ui-view

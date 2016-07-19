@@ -1,0 +1,14 @@
+.main-center
+  h1 Register
+  form(ng-submit='register.submit(register.user)')
+    .form-group
+      input.form-control(type='email', ng-model='register.user.email', placeholder='Email', required='')
+    .form-group
+      input.form-control(type='text', ng-model='register.user.username', placeholder='Username', required='')
+    .form-group
+      input.form-control(type='password', ng-model='register.user.password', placeholder='Password', required='')
+    .form-group
+      input.form-control(type='password', ng-model='register.user.password2', placeholder='Password (again)', required='')
+    button.form-control.btn.btn-success Register
+    hr
+    button.btn.btn-primary.form-control(ng-click="authenticate('facebook')") Sign in with Facebook
